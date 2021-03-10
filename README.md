@@ -1,5 +1,6 @@
 # ClassSR
 (CVPR2021) ClassSR: A General Framework to Accelerate Super-Resolution Networks by Data Characteristic
+
 Authors: Xiangtao Kong, [Hengyuan Zhao](https://github.com/zhaohengyuan1), [Yu Qiao](https://scholar.google.com/citations?user=gFtI-8QAAAAJ&hl=zh-CN), [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=zh-CN)
 [Paper](https://arxiv.org/abs/2103.04039)
 
