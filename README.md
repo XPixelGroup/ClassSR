@@ -29,8 +29,8 @@ cd ClassSR
 4. Generate simple, medium, hard (class1, class2, class3) validation data. 
 ```
 cd codes/data_scripts
-python extract_subimages_branch.py
-python divide_sub_images_branch.py
+python extract_subimages_test.py
+python divide_subimages_test.py
 ```
 5. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing) and move them to  `./experiments/pretrained_models/` folder. 
 
@@ -76,7 +76,15 @@ cd ClassSR
 
 3. Download the [divide_train.log](https://drive.google.com/file/d/1WhyYYZHfpoNEjslojuqZLR46Nlr15zqQ/view?usp=sharing) and move it to `.codes/data_scripts/`.
 
-4. Run training for a single branch (default branch1, the simplest branch).
+4. Generate simple, medium, hard (class1, class2, class3) validation data. 
+```
+cd codes/data_scripts
+python data_augmentation.py
+python extract_subimages_train.py
+python divide_subimages_train.py
+```
+
+5. Run training for a single branch (default branch1, the simplest branch).
 ```
 cd codes
 python train.py -opt options/train/train_FSRCNN.yml
@@ -84,7 +92,7 @@ python train.py -opt options/train/train_CARN.yml
 python train.py -opt options/train/train_SRResNet.yml
 python train.py -opt options/train/train_RCAN.yml
 ```
-5. The experiments will be sorted in `./experiments`. 
+6. The experiments will be sorted in `./experiments`. 
 
 ## How to train ClassSR
 
@@ -96,12 +104,11 @@ cd ClassSR
 2. Download the training datasets ([DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)) and validation dataset([DIV2K_valid](https://data.vision.ee.ethz.ch/cvl/DIV2K/), index 801-810). 
 
 
-3. Generate training data (all data).
+3. Generate training data (the all data(1.59M) in paper).
 ```
 cd codes/data_scripts
 python data_augmentation.py
 python extract_subimages_ClassSR.py
-
 ```
 4. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing)(pretrained branches) and move them to  `./experiments/pretrained_models/` folder. 
 

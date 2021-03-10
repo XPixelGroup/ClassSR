@@ -1,0 +1,42 @@
+name: test_ClassSR_FSRCNN
+suffix: ~  # add suffix to saved images
+model: ClassSR
+distortion: sr
+scale: 4
+patch_size: 32
+step: 28
+crop_border: ~  # crop border when evaluation. If None(~), crop the scale pixels
+gpu_ids: [3]
+
+datasets:
+  test_1:
+    name: test2k
+    mode: LQGT
+    dataroot_GT: /data0/xtkong/data/test2k/HR/X4
+    dataroot_LQ: /data0/xtkong/data/test2k/LR/X4
+  test_2:
+    name: test4k
+    mode: LQGT
+    dataroot_GT: /data0/xtkong/data/test4k/HR/X4
+    dataroot_LQ: /data0/xtkong/data/test4k/LR/X4
+  test_3:
+    name: test8k
+    mode: LQGT
+    dataroot_GT: /data0/xtkong/data/test8k/HR/X4
+    dataroot_LQ: /data0/xtkong/data/test8k/LR/X4
+
+
+network_G:
+  which_model_G: classSR_3class_fsrcnn_net
+  in_nc: 3
+  out_nc: 3
+
+#### path
+path:
+  pretrain_model_G: /data0/xtkong/ClassSR-github/experiments/pre_trained_models/ClassSR_FSRCNN.pth
+  pretrain_model_classifier: ~
+  pretrain_model_G_branch1: ~
+  pretrain_model_G_branch2: ~
+  pretrain_model_G_branch3: ~
+
+
