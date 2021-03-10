@@ -24,7 +24,7 @@ cd ClassSR
 ```
 2. Download the testing datasets ([DIV2K_valid](https://data.vision.ee.ethz.ch/cvl/DIV2K/)). 
 
-3. Download the [divide_val.log]() and move it to `.codes/data_scripts/`.
+3. Download the [divide_val.log](https://drive.google.com/file/d/1zMDD9Z_-fM2R2qm2QLoq7N2LMG6V92JT/view?usp=sharing) and move it to `.codes/data_scripts/`.
 
 4. Generate simple, medium, hard (class1, class2, class3) validation data. 
 ```
@@ -32,7 +32,7 @@ cd codes/data_scripts
 python extract_subimages_branch.py
 python divide_sub_images_branch.py
 ```
-5. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_) and move them to  `./experiments/pretrained_models/` folder. 
+5. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing) and move them to  `./experiments/pretrained_models/` folder. 
 
 6. Run testing for a single branch.
 ```
@@ -53,7 +53,7 @@ cd ClassSR
 ```
 2. Download the testing datasets ([DIV8K](https://competitions.codalab.org/competitions/22217#participate)). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. 
 
-3. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_) and move them to  `./experiments/pretrained_models/` folder. 
+3. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing) and move them to  `./experiments/pretrained_models/` folder. 
 
 4. Run testing for ClassSR.
 ```
@@ -72,9 +72,11 @@ python test_ClassSR.py -opt options/test/test_ClassSR_RCAN.yml
 git clone https://github.com/Xiangtaokong/ClassSR.git
 cd ClassSR
 ```
-2. Download the training datasets([DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)) and validation dataset([Set5]()).
+2. Download the training datasets([DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)) and validation dataset(Set5).
 
-3. Run training for a single branch (default branch1, the simplest branch).
+3. Download the [divide_train.log](https://drive.google.com/file/d/1WhyYYZHfpoNEjslojuqZLR46Nlr15zqQ/view?usp=sharing) and move it to `.codes/data_scripts/`.
+
+4. Run training for a single branch (default branch1, the simplest branch).
 ```
 cd codes
 python train.py -opt options/train/train_FSRCNN.yml
@@ -82,6 +84,7 @@ python train.py -opt options/train/train_CARN.yml
 python train.py -opt options/train/train_SRResNet.yml
 python train.py -opt options/train/train_RCAN.yml
 ```
+5. The experiments will be sorted in `./experiments`. 
 
 ## How to train ClassSR
 
@@ -100,7 +103,7 @@ python data_augmentation.py
 python extract_subimages_ClassSR.py
 
 ```
-4. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_)(pretrained branches) and move them to  `./experiments/pretrained_models/` folder. 
+4. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing)(pretrained branches) and move them to  `./experiments/pretrained_models/` folder. 
 
 5. Run training for ClassSR.
 ```
@@ -110,6 +113,8 @@ python train_ClassSR.py -opt options/train/train_ClassSR_CARN.yml
 python train_ClassSR.py -opt options/train/train_ClassSR_SRResNet.yml
 python train_ClassSR.py -opt options/train/train_ClassSR_RCAN.yml
 ```
+6. The experiments will be sorted in `./experiments`. 
+
 
 ## Contact
 Email: xt.kong@siat.ac.cn
