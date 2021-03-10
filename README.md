@@ -79,7 +79,7 @@ cd ClassSR
 
 3. Download the [divide_train.log](https://drive.google.com/file/d/1WhyYYZHfpoNEjslojuqZLR46Nlr15zqQ/view?usp=sharing) and move it to `.codes/data_scripts/`.
 
-4. Generate simple, medium, hard (class1, class2, class3) validation data. 
+4. Generate simple, medium, hard (class1, class2, class3) training data. 
 ```
 cd codes/data_scripts
 python data_augmentation.py
