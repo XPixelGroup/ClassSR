@@ -23,8 +23,8 @@ def main():
     # compression time. If read raw images during training, use 0 for faster IO speed.
     if mode == 'pair':
         # cut training data
-        GT_folder = '/data0/xtkong/data/DIV2K800_scale_GT'# fix to your path
-        LR_folder = '/data0/xtkong/data/DIV2K800_scale_LR'# fix to your path
+        GT_folder = '/data0/xtkong/data/DIV2K800_scale/HR/x4'# fix to your path
+        LR_folder = '/data0/xtkong/data/DIV2K800_scale/LR/x4'# fix to your path
         save_GT_folder = '/data0/xtkong/data/DIV2K_scale_sub/GT'
         save_LR_folder = '/data0/xtkong/data/DIV2K_scale_sub/LR'
 

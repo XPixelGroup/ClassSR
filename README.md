@@ -83,6 +83,7 @@ cd ClassSR
 ```
 cd codes/data_scripts
 python data_augmentation.py
+python generate_mod_LR_bic.py
 python extract_subimages_train.py
 python divide_subimages_train.py
 ```
@@ -111,7 +112,8 @@ cd ClassSR
 ```
 cd codes/data_scripts
 python data_augmentation.py
-python extract_subimages_ClassSR.py
+python generate_mod_LR_bic.py
+python extract_subimages_train.py
 ```
 4. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing)(pretrained branches) and move them to  `./experiments/pretrained_models/` folder. 
 
