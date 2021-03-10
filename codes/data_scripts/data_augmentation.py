@@ -8,7 +8,7 @@ import torch
 import cv2
 import sys
 sys.path.append("..")
-import utils.util as util
+import data.util as util
 
 #we first downsample the original images with scaling factors 0.6, 0.7, 0.8, 0.9 to generate the HR/LR images.
 for scale in [0.9, 0.8, 0.7, 0.6]:
