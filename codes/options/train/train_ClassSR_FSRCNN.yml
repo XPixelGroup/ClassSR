@@ -43,9 +43,9 @@ network_G:
 path:
   pretrain_model_G: ~
   pretrain_model_classifier: ~
-  pretrain_model_G_branch1: /data0/xtkong/ClassSR-github/experiments/pre-trained models/FSRCNN_branch1.pth
-  pretrain_model_G_branch2: /data0/xtkong/ClassSR-github/experiments/pre-trained models/FSRCNN_branch2.pth
-  pretrain_model_G_branch3: /data0/xtkong/ClassSR-github/experiments/pre-trained models/FSRCNN_branch3.pth
+  pretrain_model_G_branch1: /data0/xtkong/ClassSR-github/experiments/pre_trained_models/FSRCNN_branch1.pth
+  pretrain_model_G_branch2: /data0/xtkong/ClassSR-github/experiments/pre_trained_models/FSRCNN_branch2.pth
+  pretrain_model_G_branch3: /data0/xtkong/ClassSR-github/experiments/pre_trained_models/FSRCNN_branch3.pth
   resume_state: ~
   strict_load: true
 

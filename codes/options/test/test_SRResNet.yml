@@ -34,4 +34,4 @@ datasets:
 
 #### path
 path:
-  pretrain_model_G: /data0/xtkong/ClassSR-github/experiments/pre-trained models/SRResNet_branch1.pth
+  pretrain_model_G: /data0/xtkong/ClassSR-github/experiments/pre_trained_models/SRResNet_branch1.pth
