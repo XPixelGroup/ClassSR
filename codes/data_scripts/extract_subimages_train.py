@@ -30,7 +30,7 @@ def main():
 
         scale_ratio = 4
         crop_sz = 128  # the size of each sub-image (GT)
-        step = 112  # step of the sliding crop window (GT)
+        step = 64  # step of the sliding crop window (GT)
         thres_sz = 48  # size threshold
         ########################################################################
         # check that all the GT and LR images have correct scale ratio
