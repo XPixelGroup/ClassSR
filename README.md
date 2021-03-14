@@ -6,6 +6,7 @@
 Authors: Xiangtao Kong, [Hengyuan Zhao](https://github.com/zhaohengyuan1), [Yu Qiao](https://scholar.google.com/citations?user=gFtI-8QAAAAJ&hl=zh-CN), [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=zh-CN)
 
 
+![Demo Images](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
 
 
 ## Dependencies
