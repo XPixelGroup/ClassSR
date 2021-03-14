@@ -6,7 +6,7 @@
 Authors: Xiangtao Kong, [Hengyuan Zhao](https://github.com/zhaohengyuan1), [Yu Qiao](https://scholar.google.com/citations?user=gFtI-8QAAAAJ&hl=zh-CN), [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=zh-CN)
 
 
-![Demo Images](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
+![Demo Image](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
 
 
 ## Dependencies
@@ -130,9 +130,9 @@ python train_ClassSR.py -opt options/train/train_ClassSR_RCAN.yml
 
 ## How to generate demo images
 
-Generate demo images like these:
+Generate demo images like this one:
 
-![Demo Images](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
+![Demo Image](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
 
 Change the 'add_mask: False' to True in test_ClassSR_xxx.yml and run testing for ClassSR.
 
