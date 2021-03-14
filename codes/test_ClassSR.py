@@ -63,6 +63,8 @@ for test_loader in test_loaders:
         visuals = model.get_current_visuals(need_GT=need_GT)
 
         sr_img = visuals['rlt']  # uint8
+        if opt['add_mask']:
+            sr_img_mask=visuals['rlt_mask']
 
         num_res = visuals['num_res']
         psnr_res = visuals['psnr_res']
@@ -75,6 +77,9 @@ for test_loader in test_loaders:
         else:
             save_img_path = osp.join(dataset_dir, img_name + '.png')
         util.save_img(sr_img, save_img_path)
+        if opt['add_mask']:
+            util.save_img(sr_img_mask, save_img_path.split('.pn')[0]+'_mask.png')
+
 
         # calculate PSNR and SSIM
         if need_GT:

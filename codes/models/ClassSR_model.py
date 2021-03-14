@@ -192,6 +192,8 @@ class ClassSR_Model(BaseModel):
             index += 1
 
         self.fake_H = self.combine(sr_list, num_h, num_w, h, w, self.patch_size, self.step)
+        if self.opt['add_mask']:
+            self.fake_H_mask = self.combine_addmask(sr_list, num_h, num_w, h, w, self.patch_size, self.step,type_res)
         self.real_H = self.real_H[0:h * self.scale, 0:w * self.scale, :]
         self.num_res = self.print_res(type_res)
         self.psnr_res=[psnr_type1,psnr_type2,psnr_type3]
@@ -210,6 +212,8 @@ class ClassSR_Model(BaseModel):
         out_dict['psnr_res']=self.psnr_res
         if need_GT:
             out_dict['GT'] = self.real_H
+        if self.opt['add_mask']:
+            out_dict['rlt_mask']=self.fake_H_mask
         return out_dict
 
     def print_network(self):
@@ -287,6 +291,56 @@ class ClassSR_Model(BaseModel):
 
         for i in range(1,num_h):
             sr_img[i*step*self.scale:i*step*self.scale+(patch_size-step)*self.scale,:,:]/=2
+        return sr_img
+
+    def combine_addmask(self, sr_list, num_h, num_w, h, w, patch_size, step, type):
+        index = 0
+        sr_img = np.zeros((h * self.scale, w * self.scale, 3), 'float32')
+
+        for i in range(num_h):
+            for j in range(num_w):
+                sr_img[i * step * self.scale:i * step * self.scale + patch_size * self.scale,
+                j * step * self.scale:j * step * self.scale + patch_size * self.scale, :] += sr_list[index]
+                index += 1
+        sr_img = sr_img.astype('float32')
+
+        for j in range(1, num_w):
+            sr_img[:, j * step * self.scale:j * step * self.scale + (patch_size - step) * self.scale, :] /= 2
+
+        for i in range(1, num_h):
+            sr_img[i * step * self.scale:i * step * self.scale + (patch_size - step) * self.scale, :, :] /= 2
+
+        index2 = 0
+        for i in range(num_h):
+            for j in range(num_w):
+                # add_mask
+                alpha = 1
+                beta = 0.2
+                gamma = 0
+                bbox1 = [j * step * self.scale + 8, i * step * self.scale + 8,
+                         j * step * self.scale + patch_size * self.scale - 9,
+                         i * step * self.scale + patch_size * self.scale - 9]  # xl,yl,xr,yr
+                zeros1 = np.zeros((sr_img.shape), 'float32')
+
+                if torch.max(type, 1)[1].data.squeeze()[index2] == 0:
+                    # mask1 = cv2.rectangle(zeros1, (bbox1[0], bbox1[1]), (bbox1[2], bbox1[3]),
+                    #                      color=(0, 0, 0), thickness=1)
+                    mask2 = cv2.rectangle(zeros1, (bbox1[0]+1, bbox1[1]+1), (bbox1[2]-1, bbox1[3]-1),
+                                         color=(0, 255, 0), thickness=-1)# simple green
+                elif torch.max(type, 1)[1].data.squeeze()[index2] == 1:
+                    # mask1 = cv2.rectangle(zeros1, (bbox1[0], bbox1[1]), (bbox1[2], bbox1[3]),
+                    #                       color=(0, 0, 0), thickness=1)
+                    mask2 = cv2.rectangle(zeros1, (bbox1[0]+1, bbox1[1]+1), (bbox1[2]-1, bbox1[3]-1),
+                                          color=(0, 255, 255), thickness=-1)# medium yellow
+                elif torch.max(type, 1)[1].data.squeeze()[index2] == 2:
+                    # mask1 = cv2.rectangle(zeros1, (bbox1[0], bbox1[1]), (bbox1[2], bbox1[3]),
+                    #                       color=(0, 0, 0), thickness=1)
+                    mask2 = cv2.rectangle(zeros1, (bbox1[0]+1, bbox1[1]+1), (bbox1[2]-1, bbox1[3]-1),
+                                          color=(0, 0, 255), thickness=-1)# hard red
+
+                sr_img = cv2.addWeighted(sr_img, alpha, mask2, beta, gamma)
+                # sr_img = cv2.addWeighted(sr_img, alpha, mask1, 1, gamma)
+                index2+=1
         return sr_img
 
     def print_res(self, type_res):

@@ -127,6 +127,13 @@ python train_ClassSR.py -opt options/train/train_ClassSR_RCAN.yml
 ```
 6. The experiments will be sorted in `./experiments`. 
 
+## How to generate demo images
+
+Generate demo images like these:
+
+![Image text](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.pdf)
+
+Change the 'add_mask: False' to True in test_ClassSR_xxx.yml and run testing for ClassSR.
 
 ## Contact
 Email: xt.kong@siat.ac.cn

@@ -7,6 +7,7 @@ patch_size: 32
 step: 28
 crop_border: ~  # crop border when evaluation. If None(~), crop the scale pixels
 gpu_ids: [3]
+add_mask: False
 
 datasets:
 
