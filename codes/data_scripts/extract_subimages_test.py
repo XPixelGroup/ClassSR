@@ -11,9 +11,6 @@ from utils.util import ProgressBar  # noqa: E402
 import data.util as data_util  # noqa: E402
 
 
-#Then we densely crop 1.59M sub-images with size 32 × 32 from LR images.
-
-
 def main():
     mode = 'pair'  # single (one input folder) | pair (extract corresponding GT and LR pairs)
     opt = {}
