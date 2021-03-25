@@ -9,6 +9,7 @@ import utils.util as util
 from data.util import bgr2ycbcr
 from data import create_dataset, create_dataloader
 from models import create_model
+import numpy as np
 
 #### options
 parser = argparse.ArgumentParser()
