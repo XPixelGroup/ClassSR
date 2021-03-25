@@ -136,5 +136,17 @@ Generate demo images like this one:
 
 Change the 'add_mask: False' to True in test_ClassSR_xxx.yml and run testing for ClassSR.
 
+## Citation
+```
+@misc{kong2021classsr,
+      title={ClassSR: A General Framework to Accelerate Super-Resolution Networks by Data Characteristic}, 
+      author={Xiangtao Kong and Hengyuan Zhao and Yu Qiao and Chao Dong},
+      year={2021},
+      eprint={2103.04039},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
 ## Contact
 Email: xt.kong@siat.ac.cn
