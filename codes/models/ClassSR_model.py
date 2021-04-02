@@ -167,7 +167,8 @@ class ClassSR_Model(BaseModel):
             img = img[:, :, [2, 1, 0]]
             img = torch.from_numpy(np.ascontiguousarray(np.transpose(img, (2, 0, 1)))).float()[None, ...].to(
                 self.device)
-            srt, type = self.netG(img, False)
+            with torch.no_grad():
+                srt, type = self.netG(img, False)
 
             if self.which_model == 'classSR_3class_rcan':
                 sr_img = util.tensor2img(srt.detach()[0].float().cpu(), out_type=np.uint8, min_max=(0, 255))
