@@ -8,158 +8,60 @@ import numpy as np
 import cv2
 import glob
 
-GT_D='/data0/xtkong/data/DIV2K_valid_HR/DIV2K_valid_HR_64sub'
-GT_U='/data0/xtkong/data/benchmark/Urban100/HR_64sub'
-
-SR_D=['/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_ensemble4/DIV2K100_64sub',
-'/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_o/DIV2K100_64sub',
-'/data0/xtkong/ClassSR/results/002_LAM_FSRCNN_DIV2K_urban_results_ensemble4/DIV2K100_64sub',
-'/data0/xtkong/ClassSR/results/002_LAM_FSRCNN_DIV2K_urban_results_o/DIV2K100_64sub',
-'/data0/xtkong/ClassSR/results/003_LAM_SRResNet_DIV2K_urban_results_ensemble4/DIV2K100_64sub',
-'/data0/xtkong/ClassSR/results/003_LAM_SRResNet_DIV2K_urban_results_o/DIV2K100_64sub']
-
-SR_U=['/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_ensemble4/urban100_64sub',
-'/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_o/urban100_64sub',
-'/data0/xtkong/ClassSR/results/002_LAM_FSRCNN_DIV2K_urban_results_ensemble4/urban100_64sub',
-'/data0/xtkong/ClassSR/results/002_LAM_FSRCNN_DIV2K_urban_results_o/urban100_64sub',
-'/data0/xtkong/ClassSR/results/003_LAM_SRResNet_DIV2K_urban_results_ensemble4/urban100_64sub',
-'/data0/xtkong/ClassSR/results/003_LAM_SRResNet_DIV2K_urban_results_o/urban100_64sub']
-
 def main():
-    for i in SR_D:
-        cal(GT_D,i)
-
-def cal(GT,SR):
     # Configurations
 
     # GT - Ground-truth;
     # Gen: Generated / Restored / Recovered images
-    folder_GT = GT
-    folder_Gen = SR
-
-    log_path=SR.split('/DIV2K100_64')[0]
-
-    f = open(log_path+"/64sub_DIV2K_psnr.txt", "a+")
+    folder_GT = '/data0/xtkong/data/DIV2K_valid_HR/DIV2K_valid_HR_64sub'
+    folder_Gen = '/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_ensemble4/DIV2K100_64sub'
 
     crop_border = 4
     suffix = ''  # suffix for Gen images
+    test_Y = False  # True: test Y channel only; False: test RGB channels
+
+    PSNR_all = []
+    SSIM_all = []
     img_list = sorted(glob.glob(folder_GT + '/*'))
 
+    if test_Y:
+        print('Testing Y channel.')
+    else:
+        print('Testing RGB channels.')
+
     for i, img_path in enumerate(img_list):
-        try:
-            base_name = os.path.splitext(os.path.basename(img_path))[0]
-            im_GT = cv2.imread(img_path) / 255.
-            im_Gen = cv2.imread(os.path.join(folder_Gen, base_name + suffix + '.png')) / 255.
+        base_name = os.path.splitext(os.path.basename(img_path))[0]
+        im_GT = cv2.imread(img_path) / 255.
+        im_Gen = cv2.imread(os.path.join(folder_Gen, base_name + suffix + '.png')) / 255.
 
-            test_Y=False
-            if test_Y and im_GT.shape[2] == 3:  # evaluate on Y channel in YCbCr color space
-                im_GT_in = bgr2ycbcr(im_GT)
-                im_Gen_in = bgr2ycbcr(im_Gen)
-            else:
-                im_GT_in = im_GT
-                im_Gen_in = im_Gen
+        if test_Y and im_GT.shape[2] == 3:  # evaluate on Y channel in YCbCr color space
+            im_GT_in = bgr2ycbcr(im_GT)
+            im_Gen_in = bgr2ycbcr(im_Gen)
+        else:
+            im_GT_in = im_GT
+            im_Gen_in = im_Gen
 
-            # crop borders
-            if im_GT_in.ndim == 3:
-                cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border, :]
-                cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border, :]
-            elif im_GT_in.ndim == 2:
-                cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border]
-                cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border]
-            else:
-                raise ValueError('Wrong image dimension: {}. Should be 2 or 3.'.format(im_GT_in.ndim))
-            PSNR = calculate_psnr(cropped_GT * 255, cropped_Gen * 255)
-            SSIM = calculate_ssim(cropped_GT * 255, cropped_Gen * 255)
+        # crop borders
+        if im_GT_in.ndim == 3:
+            cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border, :]
+            cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border, :]
+        elif im_GT_in.ndim == 2:
+            cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border]
+            cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border]
+        else:
+            raise ValueError('Wrong image dimension: {}. Should be 2 or 3.'.format(im_GT_in.ndim))
 
-            test_Y = True
-            if test_Y and im_GT.shape[2] == 3:  # evaluate on Y channel in YCbCr color space
-                im_GT_in = bgr2ycbcr(im_GT)
-                im_Gen_in = bgr2ycbcr(im_Gen)
-            else:
-                im_GT_in = im_GT
-                im_Gen_in = im_Gen
+        # calculate PSNR and SSIM
+        PSNR = calculate_psnr(cropped_GT * 255, cropped_Gen * 255)
 
-            # crop borders
-            if im_GT_in.ndim == 3:
-                cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border, :]
-                cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border, :]
-            elif im_GT_in.ndim == 2:
-                cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border]
-                cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border]
-            else:
-                raise ValueError('Wrong image dimension: {}. Should be 2 or 3.'.format(im_GT_in.ndim))
-            PSNR_Y = calculate_psnr(cropped_GT * 255, cropped_Gen * 255)
-            SSIM_Y = calculate_ssim(cropped_GT * 255, cropped_Gen * 255)
-
-
-            # calculate PSNR and SSIM
-
-
-            print('{:3d} - {:25}. \tPSNR: {:.6f} dB, \tSSIM: {:.6f}, \tPSNR_Y: {:.6f} dB, \tSSIM_Y: {:.6f}'.format(
-                i + 1, base_name, PSNR, SSIM,PSNR_Y,SSIM_Y))
-            f.write('{:3d} - {:25}. \tPSNR: {:.6f} dB, \tSSIM: {:.6f}, \tPSNR_Y: {:.6f} dB, \tSSIM_Y: {:.6f}'.format(
-                i + 1, base_name, PSNR, SSIM,PSNR_Y,SSIM_Y)+'\r\n')
-        except:
-            pass
-
-    f.close()
-
-
-
-# def main():
-#     # Configurations
-#
-#     # GT - Ground-truth;
-#     # Gen: Generated / Restored / Recovered images
-#     folder_GT = '/data0/xtkong/data/DIV2K_valid_HR/DIV2K_valid_HR_64sub'
-#     folder_Gen = '/data0/xtkong/ClassSR/results/001_LAM_RCAN_DIV2K_urban_results_ensemble4/DIV2K100_64sub'
-#
-#     crop_border = 4
-#     suffix = ''  # suffix for Gen images
-#     test_Y = False  # True: test Y channel only; False: test RGB channels
-#
-#     PSNR_all = []
-#     SSIM_all = []
-#     img_list = sorted(glob.glob(folder_GT + '/*'))
-#
-#     if test_Y:
-#         print('Testing Y channel.')
-#     else:
-#         print('Testing RGB channels.')
-#
-#     for i, img_path in enumerate(img_list):
-#         base_name = os.path.splitext(os.path.basename(img_path))[0]
-#         im_GT = cv2.imread(img_path) / 255.
-#         im_Gen = cv2.imread(os.path.join(folder_Gen, base_name + suffix + '.png')) / 255.
-#
-#         if test_Y and im_GT.shape[2] == 3:  # evaluate on Y channel in YCbCr color space
-#             im_GT_in = bgr2ycbcr(im_GT)
-#             im_Gen_in = bgr2ycbcr(im_Gen)
-#         else:
-#             im_GT_in = im_GT
-#             im_Gen_in = im_Gen
-#
-#         # crop borders
-#         if im_GT_in.ndim == 3:
-#             cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border, :]
-#             cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border, :]
-#         elif im_GT_in.ndim == 2:
-#             cropped_GT = im_GT_in[crop_border:-crop_border, crop_border:-crop_border]
-#             cropped_Gen = im_Gen_in[crop_border:-crop_border, crop_border:-crop_border]
-#         else:
-#             raise ValueError('Wrong image dimension: {}. Should be 2 or 3.'.format(im_GT_in.ndim))
-#
-#         # calculate PSNR and SSIM
-#         PSNR = calculate_psnr(cropped_GT * 255, cropped_Gen * 255)
-#
-#         SSIM = calculate_ssim(cropped_GT * 255, cropped_Gen * 255)
-#         print('{:3d} - {:25}. \tPSNR: {:.6f} dB, \tSSIM: {:.6f}'.format(
-#             i + 1, base_name, PSNR, SSIM))
-#         PSNR_all.append(PSNR)
-#         SSIM_all.append(SSIM)
-#     print('Average: PSNR: {:.6f} dB, SSIM: {:.6f}'.format(
-#         sum(PSNR_all) / len(PSNR_all),
-#         sum(SSIM_all) / len(SSIM_all)))
+        SSIM = calculate_ssim(cropped_GT * 255, cropped_Gen * 255)
+        print('{:3d} - {:25}. \tPSNR: {:.6f} dB, \tSSIM: {:.6f}'.format(
+            i + 1, base_name, PSNR, SSIM))
+        PSNR_all.append(PSNR)
+        SSIM_all.append(SSIM)
+    print('Average: PSNR: {:.6f} dB, SSIM: {:.6f}'.format(
+        sum(PSNR_all) / len(PSNR_all),
+        sum(SSIM_all) / len(SSIM_all)))
 
 
 def calculate_psnr(img1, img2):
