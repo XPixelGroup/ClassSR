@@ -39,10 +39,10 @@ def main():
             img_LR = Image.open(path_LR)
             w_GT, h_GT = img_GT.size
             w_LR, h_LR = img_LR.size
-            assert w_GT / w_LR == scale_ratio, 'GT width [{:d}] is not {:d}X as LR weight [{:d}] for {:s}.'.format(  # noqa: E501
+            assert w_GT / w_LR == scale_ratio, 'GT width [{:d}] is not {:d}X as LR width [{:d}] for {:s}.'.format(  # noqa: E501
                 w_GT, scale_ratio, w_LR, path_GT)
-            assert w_GT / w_LR == scale_ratio, 'GT width [{:d}] is not {:d}X as LR weight [{:d}] for {:s}.'.format(  # noqa: E501
-                w_GT, scale_ratio, w_LR, path_GT)
+            assert h_GT / h_LR == scale_ratio, 'GT height [{:d}] is not {:d}X as LR height [{:d}] for {:s}.'.format(  # noqa: E501
+                h_GT, scale_ratio, h_LR, path_GT)
         # check crop size, step and threshold size
         assert crop_sz % scale_ratio == 0, 'crop size is not {:d}X multiplication.'.format(
             scale_ratio)
