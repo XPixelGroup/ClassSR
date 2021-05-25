@@ -60,6 +60,8 @@ cd ClassSR
 ```
 2. Download the testing datasets ([DIV8K](https://competitions.codalab.org/competitions/22217#participate)). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. 
 
+(You need register for the competition (Ntire 2020 was held on 2020, but we can register now), then you can download DIV8K dataset.)
+
 3. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing) and move them to  `./experiments/pretrained_models/` folder. 
 
 4. Run testing for ClassSR.
