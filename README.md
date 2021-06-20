@@ -143,11 +143,13 @@ Change the 'add_mask: False' to True in test_ClassSR_xxx.yml and run testing for
 
 ## Citation
 ```
-@inproceedings{kong2021classsr,
-  title     = {ClassSR: A General Framework to Accelerate Super-Resolution Networks by Data Characteristic},
-  author    = {Kong, Xiangtao and Zhao, Hengyuan and Qiao, Yu and Dong, Chao},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  year      = {2021}
+@InProceedings{Kong_2021_CVPR,
+    author    = {Kong, Xiangtao and Zhao, Hengyuan and Qiao, Yu and Dong, Chao},
+    title     = {ClassSR: A General Framework to Accelerate Super-Resolution Networks by Data Characteristic},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {12016-12025}
 }
 ```
 
