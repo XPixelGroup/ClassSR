@@ -35,8 +35,8 @@ datasets:
   val:
     name: set5
     mode: LQGT
-    dataroot_GT: /data0/xtkong/ClassSR/datasets/Set5/HR.lmdb
-    dataroot_LQ: /data0/xtkong/ClassSR/datasets/Set5/LR.lmdb
+    dataroot_GT: /data0/xtkong/ClassSR/datasets/Set5/HR
+    dataroot_LQ: /data0/xtkong/ClassSR/datasets/Set5/LR
 
 
 #### path
