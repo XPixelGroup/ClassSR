@@ -58,7 +58,8 @@ python test.py -opt options/test/test_RCAN.yml
 git clone https://github.com/Xiangtaokong/ClassSR.git
 cd ClassSR
 ```
-2. Download the testing datasets ([DIV8K](https://competitions.codalab.org/competitions/22217#participate)). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. 
+2. Download the testing datasets ([DIV8K](https://competitions.codalab.org/competitions/22217#participate)). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. You can also download the processed data (Test2K, 4K, 8K) [Google Drive](https://drive.google.com/drive/folders/18b3QKaDJdrd9y0KwtrWU2Vp9nHxvfTZH?usp=sharing) [Baidu Drive](https://pan.baidu.com/s/1OARDfd2x3ynQs7m1tu_RnA) (Password: 7dw1)
+
 
 (You need register for the competition (Ntire 2020 was held on 2020, but we can register now), then you can download DIV8K dataset.)
 
