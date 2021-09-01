@@ -324,8 +324,8 @@ def main():
                         tb_logger.add_scalar('class3_num', num_ress[2], current_step)
 
                         tb_logger.add_scalar('Class1_PSNR', psnr_ress[0]/num_ress[0], current_step)
-                        tb_logger.add_scalar('Class1_PSNR', psnr_ress[1]/num_ress[1], current_step)
-                        tb_logger.add_scalar('class1_PSNR', psnr_ress[2]/num_ress[2], current_step)
+                        tb_logger.add_scalar('Class2_PSNR', psnr_ress[1]/num_ress[1], current_step)
+                        tb_logger.add_scalar('class3_PSNR', psnr_ress[2]/num_ress[2], current_step)
 
 
 
