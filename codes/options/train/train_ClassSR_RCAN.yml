@@ -62,7 +62,7 @@ train:
   eta_min: !!float 2e-6
 
   pixel_criterion: ClassSR_loss
-  l1w: 250
+  l1w: 4
   class_loss_w: 0.5
   average_loss_w: 3
 
