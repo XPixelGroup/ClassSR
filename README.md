@@ -140,7 +140,7 @@ python train_ClassSR.py -opt options/train/train_ClassSR_RCAN.yml
 
 Generate demo images like this one:
 
-![Demo Image](https://github.com/Xiangtaokong/ClassSR/tree/main/demo_images/show.png)
+![Demo Image](https://raw.githubusercontent.com/Xiangtaokong/ClassSR/main/demo_images/show.png)
 
 Change the 'add_mask: False' to True in test_ClassSR_xxx.yml and run testing for ClassSR.
 
