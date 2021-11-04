@@ -315,7 +315,7 @@ class ClassSR_Model(BaseModel):
         for i in range(num_h):
             for j in range(num_w):
                 # add_mask
-                alpha = 1
+                alpha = 0.8
                 beta = 0.2
                 gamma = 0
                 bbox1 = [j * step * self.scale + 8, i * step * self.scale + 8,
