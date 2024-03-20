@@ -61,7 +61,7 @@ cd ClassSR
 
 2. Download the testing datasets (Test2K, 4K, 8K) [Google Drive](https://drive.google.com/drive/folders/18b3QKaDJdrd9y0KwtrWU2Vp9nHxvfTZH?usp=sharing) or [Baidu Drive](https://pan.baidu.com/s/1OARDfd2x3ynQs7m1tu_RnA) (Password: 7dw1) .
 
-3. You can also download the source data [DIV8K](https://competitions.codalab.org/competitions/22217#participate). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. (In this way, you need register for the competition (Ntire 2020 was held on 2020, but we can register now), then you can download DIV8K dataset.)
+3. You can also download the source data [DIV8K](https://competitions.codalab.org/competitions/22217#participate) (Using this link http://data.vision.ee.ethz.ch/timofter/AIM19ExtremeSR/trainHR_001to200.zip and change the "001to200" to "201to400" "401to600" …………"1401to1500" for all the data.). Test8K contains the images (index 1401-1500) from DIV8K. Test2K/4K contain the images (index 1201-1300/1301-1400) from DIV8K which are downsampled to 2K and 4K resolution. (In this way, you need register for the competition (Ntire 2020 was held on 2020, but we can register now), then you can download DIV8K dataset.)
 
 4. Download [pretrained models](https://drive.google.com/drive/folders/1jzAFazbaGxHb-xL4vmxc-hHbR1J-uek_?usp=sharing) and move them to  `./experiments/pretrained_models/` folder. 
 
